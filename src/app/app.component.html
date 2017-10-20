@@ -1,4 +1,9 @@
-<div class="container">
+<div class="header">
+  <mat-toolbar color="primary">
+  <span><button  mat-button mat-raised-button color="accent" (click)="clearHistory()">New Game</button></span>
+</mat-toolbar>
+</div>
+<div class="container main">
   <!--Table-->
   <table class="table table-hover table-responsive">
 
@@ -34,14 +39,12 @@
   </table>
 </div>
   <!--Table-->
-<div class="container">
+<div class="container" style="margin-bottom: 120px">
   <div class="controllers">
     <button *ngIf="!(screenShots.length >= 2)" mat-button mat-raised-button color="primary"(click)="addPlayer()">add player</button>
-    <button *ngIf="players.length >= 2" mat-button mat-raised-button color="accent" (click)="updateScore()">update score</button>
   </div>
 </div>
-<div class="container">
-  <div class="newGame">
-    <button *ngIf="(screenShots.length >= 2)" mat-button mat-raised-button color="primary" (click)="clearHistory()">New Game</button>
-  </div>
-</div>
+
+<button mat-fab class="addButton" *ngIf="players.length >= 2" (click)="updateScore()">
+    +
+</button>

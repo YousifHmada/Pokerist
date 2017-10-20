@@ -24,6 +24,25 @@ table{
 	margin-top: 20px;
 }
 
+.addButton{
+	z-index: 5000;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+.header{
+	position: fixed;
+	z-index: 10000;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+.main{
+	z-index: 200;
+	margin-top: 80px;
+}
 /*td,th{
 	overflow: hidden;
 	flex: 1 1;

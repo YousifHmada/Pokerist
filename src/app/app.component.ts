@@ -27,6 +27,7 @@ export class AppComponent implements OnInit{
  updateScore(){
   console.log(this.screenShots);
   this.playerService.updateScore();
+  window.scrollBy(0, 20000);
  }
  clearHistory(){
  	this.playerService.clearHistory();
