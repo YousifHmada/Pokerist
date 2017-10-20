@@ -11,12 +11,17 @@ export class PlayerComponent implements OnInit {
 
   @Input() player:Player;
   transaction = 0;
+  minus = false;
   constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
   	this.playerService.scoreUpdated.subscribe(
   		()=>{
-  			this.player.score += this.transaction;
+  			if(this.minus){
+          this.player.score -= this.transaction;
+        }else{
+          this.player.score += this.transaction;
+        }
   			this.transaction = 0;
   		}
   	)

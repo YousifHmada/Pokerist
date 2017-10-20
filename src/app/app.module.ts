@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { FormsModule } from '@angular/forms';
-import {MatToolbarModule,MatInputModule,MatFormFieldModule,MatButtonModule} from '@angular/material';
+import {MatCheckboxModule,MatToolbarModule,MatInputModule,MatFormFieldModule,MatButtonModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import {MatToolbarModule,MatInputModule,MatFormFieldModule,MatButtonModule} from
     BrowserAnimationsModule,
     FormsModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatToolbarModule,
     MatInputModule,
     MatButtonModule
