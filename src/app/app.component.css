@@ -23,6 +23,9 @@
 table{
 	margin-top: 20px;
 }
+.example-half-width{
+	width: 100%;
+}
 
 .addButton{
 	z-index: 5000;

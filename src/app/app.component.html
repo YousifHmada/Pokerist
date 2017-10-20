@@ -39,9 +39,15 @@
   </table>
 </div>
   <!--Table-->
-<div class="container" style="margin-bottom: 120px">
+<div class="container"  *ngIf="show" style="margin-bottom: 20px">
+  <mat-form-field class="example-half-width">
+    <input matInput type="string" placeholder="PlayerName" [(ngModel)]="playerName" #myInput>
+  </mat-form-field>
+  <button *ngIf="show" class="example-half-width" mat-button mat-raised-button color="accent"(click)="addPlayer()">save</button>
+</div>
+<div *ngIf="!show" class="container" style="margin-bottom: 120px">
   <div class="controllers">
-    <button *ngIf="!(screenShots.length >= 2)" mat-button mat-raised-button color="primary"(click)="addPlayer()">add player</button>
+    <button *ngIf="!(screenShots.length >= 2)" mat-button mat-raised-button color="primary"(click)="show=true">add player</button>
   </div>
 </div>
 

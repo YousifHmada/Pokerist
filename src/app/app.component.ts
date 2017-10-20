@@ -15,23 +15,29 @@ import {PlayerService} from "./player/player.service";
 export class AppComponent implements OnInit{
  players: Player[] = [];
  screenShots = [];
+ show = false;
+ playerName='';
  constructor(private playerService: PlayerService){}
  ngOnInit(){
   this.players = this.playerService.getPlayers();
   this.screenShots = this.playerService.getScreenShots();
  }
  addPlayer(){
-  this.playerService.addPlayer(new Player("ahmed",2000))
-  console.log(this.screenShots);
+  if(this.playerName!=''){
+    this.playerService.addPlayer(new Player(this.playerName,2000))
+    this.show=false;
+    this.playerName = '';
+  }
  }
  updateScore(){
-  console.log(this.screenShots);
   this.playerService.updateScore();
   window.scrollBy(0, 20000);
  }
  clearHistory(){
- 	this.playerService.clearHistory();
- 	this.players = this.playerService.getPlayers();
+ 	  this.playerService.clearHistory();
+ 	  this.players = this.playerService.getPlayers();
   	this.screenShots = this.playerService.getScreenShots();
+    this.show=false;
+    this.playerName = '';
  }
 }
