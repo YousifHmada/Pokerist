@@ -1,0 +1,36 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.newGame button,.controllers button{
+	width: 100%;
+}
+.controllers button{
+	margin-bottom: 10px;
+}
+
+.newGame button{
+	margin-top: 10px;
+}
+.container-table{
+	margin: 10px auto;
+}
+table{
+	margin-top: 20px;
+}
+
+/*td,th{
+	overflow: hidden;
+	flex: 1 1;
+}
+
+tbody,tfoot,thead{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}*/
