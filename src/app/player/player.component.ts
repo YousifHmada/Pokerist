@@ -5,26 +5,45 @@ import { PlayerService } from './player.service';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.css'],
 })
 export class PlayerComponent implements OnInit {
 
   @Input() player:Player;
-  transaction = 0;
-  minus = false;
+  showInput = false;
   constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
   	this.playerService.scoreUpdated.subscribe(
   		()=>{
-  			if(this.minus){
-          this.player.score -= this.transaction;
-        }else{
-          this.player.score += this.transaction;
-        }
-  			this.transaction = 0;
+          this.player.score += this.player.transaction;
+          this.player.transaction = 0;
   		}
   	)
+  }
+
+  onBlurMethod(){
+    this.showInput = !this.showInput;
+    if((this.player.score + this.player.transaction ) < this.playerService.transactionStep)
+    {
+      this.player.transaction = this.player.score*-1;
+    }
+    this.playerService.checkScoresValidity();
+  }
+
+
+  updateTransaction(caseTransaction:String){
+    if(caseTransaction == 'sub'){
+      if((this.player.score + this.player.transaction ) < this.playerService.transactionStep)
+      {
+        this.player.transaction = this.player.score*-1;
+      }else{
+        this.player.transaction -= this.playerService.transactionStep;
+      }
+    }else{
+      this.player.transaction += this.playerService.transactionStep;
+    }
+    this.playerService.checkScoresValidity();
   }
 
 }

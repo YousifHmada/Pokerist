@@ -17,6 +17,12 @@ export class AppComponent implements OnInit{
  screenShots = [];
  show = false;
  playerName='';
+ editNames = false;
+ showScores = true;
+ editButtonColor(){
+  return this.editNames? "":"accent";
+ }
+ // showScores = false;
  constructor(private playerService: PlayerService){}
  ngOnInit(){
   this.players = this.playerService.getPlayers();
@@ -24,7 +30,7 @@ export class AppComponent implements OnInit{
  }
  addPlayer(){
   if(this.playerName!=''){
-    this.playerService.addPlayer(new Player(this.playerName,2000))
+    this.playerService.addPlayer(new Player(this.playerName,100000))
     this.show=false;
     this.playerName = '';
   }
@@ -34,10 +40,13 @@ export class AppComponent implements OnInit{
   window.scrollBy(0, 20000);
  }
  clearHistory(){
+    this.playerService.transactionStep = 500;
  	  this.playerService.clearHistory();
  	  this.players = this.playerService.getPlayers();
   	this.screenShots = this.playerService.getScreenShots();
     this.show=false;
+    this.editNames=false;
+    this.showScores = true;
     this.playerName = '';
  }
 }

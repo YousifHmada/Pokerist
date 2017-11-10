@@ -3,6 +3,14 @@
   flex-direction: column;
 }
 
+.blackText{
+	color: black;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
 .example-container > * {
   width: 100%;
 }

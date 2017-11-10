@@ -1,4 +1,8 @@
-<mat-form-field class="example-full-width">
-    <input matInput type="number" [(ngModel)]="transaction">
+<mat-form-field *ngIf="showInput" class="example-full-width">
+    <input matInput type="number" (blur)="onBlurMethod()" [(ngModel)]="player.transaction" autofocus>
 </mat-form-field>
-<mat-checkbox class="example-margin" [(ngModel)]="minus">-</mat-checkbox>
+<p *ngIf="!showInput" (dblclick)="showInput = true;inputRef" class="noselect">{{player.transaction}}</p>
+<div class="buttonsContainer">
+	<button mat-mini-fab color="accent" mat-fab class="subtract" (click)="updateTransaction('sub')">-</button>
+	<button mat-mini-fab color="primary" class="add" (click)="updateTransaction('add')">+</button>
+</div>

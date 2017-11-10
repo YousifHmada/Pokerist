@@ -1,38 +1,62 @@
 <div class="header">
   <mat-toolbar color="primary">
-  <span><button  mat-button mat-raised-button color="accent" (click)="clearHistory()">New Game</button></span>
-</mat-toolbar>
+    <span><button  mat-button mat-raised-button color="accent" (click)="clearHistory()">New Game</button></span>
+    <span class="example-spacer"></span>
+    <span><button  mat-button mat-raised-button color="{{editButtonColor()}}" (click)="editNames =! editNames">
+      <span *ngIf="!editNames">Edit</span>
+      <span *ngIf="editNames" class="blackText">Save</span>
+    </button></span>
+  </mat-toolbar>
 </div>
 <div class="container main">
   <!--Table-->
   <table class="table table-hover table-responsive">
 
       <!--Table head-->
-      <thead>
+      <thead class="noselect">
           <tr>
               <th></th>
-              <th *ngFor="let player of players">{{player.name}}</th>
+              <ng-container *ngFor="let player of players">
+                <th *ngIf="player.score != 0">
+                <mat-form-field *ngIf="editNames">
+                  <input matInput (blur)="onBlurMethod()" [(ngModel)]="player.name">
+                </mat-form-field>
+                <span *ngIf="!editNames">{{player.name}}</span></th>
+              </ng-container>
           </tr>
       </thead>
       <!--Table head-->
 
       <!--Table body-->
-      <tbody>
+      <tbody (dblclick)="showScores = !showScores" class="noselect">
+        <ng-container *ngIf="showScores">
           <tr *ngFor="let screenShot of screenShots;let i = index">
-              <th scope="row">{{i}}</th>
-              <td *ngFor="let column of screenShot">{{column}}</td>
+              <th>{{i}}</th>
+              <ng-container *ngFor="let column of screenShots[screenShots.length -1];let x = index">
+                <td *ngIf="players[x].score != 0">{{column}}</td>
+              </ng-container>
           </tr>
-          
+        </ng-container>
+        <ng-container *ngIf="!showScores">
+          <tr>
+              <th scope="row">{{screenShots.length -1}}</th>
+              <ng-container *ngFor="let column of screenShots[screenShots.length -1];let i = index">
+                <td *ngIf="players[i].score != 0">{{column}}</td>
+              </ng-container>
+          </tr>
+         </ng-container> 
       </tbody>
       <!--Table body-->
 
       <!--Table foot-->
-      <tfoot class="primary">
+      <tfoot class="primary noselect">
           <tr>
               <th></th>
-              <th *ngFor="let player of players">
-                <app-player [player]="player"></app-player>
-              </th>
+              <ng-container *ngFor="let player of players">
+                <th *ngIf="player.score != 0">
+                  <app-player [player]="player"></app-player>
+                </th>
+              </ng-container>
           </tr>
       </tfoot>
       <!--Table foot-->
@@ -51,6 +75,6 @@
   </div>
 </div>
 
-<button mat-fab class="addButton" *ngIf="players.length >= 2" (click)="updateScore()">
+<button mat-fab class="addButton" *ngIf="players.length >= 2" (click)="updateScore()" disabled="{{!playerService.scoreValid}}">
     +
 </button>
